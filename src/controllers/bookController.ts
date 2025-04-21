@@ -42,7 +42,7 @@ export const updateBookById = async (req: Request, res: Response) => {
     res.status(200).json(book);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Error deleting book" });
+    res.status(500).json({ message: "Error updating book" });
   }
 };
 

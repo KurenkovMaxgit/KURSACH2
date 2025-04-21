@@ -42,7 +42,7 @@ export const updateStudentById = async (req: Request, res: Response) => {
     res.status(200).json(student);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Error deleting student" });
+    res.status(500).json({ message: "Error updating student" });
   }
 };
 
