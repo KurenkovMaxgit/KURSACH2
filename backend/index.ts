@@ -1,10 +1,14 @@
 import express from "express";
+import cors from "cors";
 import authorRoutes from "./src/routes/authorRoutes";
 import bookRoutes from "./src/routes/bookRoutes";
 import orderRoutes from "./src/routes/ordersRoutes";
 import studentRoutes from "./src/routes/studentRoutes";
 
 const app = express();
+
+app.use(cors());
+
 app.use(express.json());
 app.use("/api", authorRoutes);
 app.use("/api", bookRoutes);
