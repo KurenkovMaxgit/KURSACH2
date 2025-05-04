@@ -82,13 +82,13 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import axios from 'axios'
 
 const students = ref<{ id: number, name: string, surname: string, faculty: string, phone: string, fullName: string }[]>([])
 const books = ref<{ id: number, title: string, year: string, availability: boolean }[]>([])
 
-onMounted((async () => {
+onActivated((async () => {
     const studentsResponse = await axios.get('http://localhost:3000/api/student')
     students.value = studentsResponse.data.map((
         x: { id: number, name: string, surname: string, faculty: string, phone: string, fullName: string }) => {

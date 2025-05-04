@@ -103,11 +103,11 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
-import { useField, useForm } from 'vee-validate'
+import { ref } from 'vue';
+import { useField } from 'vee-validate'
 import axios from 'axios'
 const authors = ref<{ id: number, name: string, surname: string, fullName: string }[]>([])
-onMounted(async () => {
+onActivated(async () => {
     const response = await axios.get('http://localhost:3000/api/author')
     authors.value = response.data.map((
         x: { id: string, name: string, surname: string }) => {
