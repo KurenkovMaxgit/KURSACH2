@@ -13,7 +13,7 @@ export const createBook = async (
   return await prisma.book.create({
     data: {
       title: book.title,
-      year: book.year,
+      year: Number(book.year),
       availability: book.availability,
       authors: {
         create: authors.map((author) => {
@@ -49,9 +49,25 @@ export const getBookById = async (bookId: number) => {
 
 export const updateBookById = async (
   bookId: number,
-  book: Prisma.bookUpdateInput
+  book: Prisma.bookUpdateInput,
+  authors: [{ id: number }]
 ) => {
-  return await prisma.book.update({ where: { id: bookId }, data: book });
+  return await prisma.book.update({
+    where: { id: Number(bookId) },
+    data: {
+      title: book.title,
+      year: Number(book.year),
+      availability: book.availability,
+      authors: {
+        deleteMany: {},
+        createMany: {
+          data: authors.map((author) => ({
+            author_id: author.id,
+          })),
+        },
+      },
+    },
+  });
 };
 
 export const deleteBookById = async (bookId: number) => {

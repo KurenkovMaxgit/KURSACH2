@@ -14,11 +14,12 @@ export const createOrder = async (data: {
       order_date: data.orderDate,
       return_date: data.returnDate,
     },
+    include: { books: true }
   });
 };
 
 export const getAllOrders = async () => {
-  return await prisma.order_table.findMany();
+  return await prisma.order_table.findMany({include: { books: true }});
 };
 
 export const getAllOrdersByStudentId = async (studentId: number) => {
@@ -42,7 +43,7 @@ export const updateOrderById = async (
     bookIds: Array<{ id: number }>;
     orderDate: Date;
     returnDate: Date;
-  }
+  },
 ) => {
   return await prisma.order_table.update({
     where: { id: orderId },
@@ -52,6 +53,7 @@ export const updateOrderById = async (
       order_date: data.orderDate,
       return_date: data.returnDate,
     },
+    include: { books: true },
   });
 };
 

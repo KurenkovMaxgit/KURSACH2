@@ -12,16 +12,6 @@ export const createAuthor = async (req: Request, res: Response) => {
   }
 };
 
-export const getAuthorById = async (req: Request, res: Response) => {
-  try {
-    const author = await authorRepository.getAuthorById(Number(req.params.id));
-    res.json(author);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Error retrieving author" });
-  }
-};
-
 export const getAllAuthors = async (req: Request, res: Response) => {
   try {
     const authors = await authorRepository.getAllAuthors();
@@ -29,6 +19,16 @@ export const getAllAuthors = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error retrieving authors" });
+  }
+};
+
+export const getAuthorById = async (req: Request, res: Response) => {
+  try {
+    const author = await authorRepository.getAuthorById(Number(req.params.id));
+    res.json(author);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error retrieving author" });
   }
 };
 

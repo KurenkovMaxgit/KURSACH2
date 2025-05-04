@@ -4,7 +4,7 @@ import * as bookRepository from "../repositories/bookRepository";
 export const createBook = async (req: Request, res: Response) => {
   try {
     const {book, authors} = req.body
-    const newBook = await bookRepository.createBook(book, authors ); // todo pass book data add array of authors ids
+    const newBook = await bookRepository.createBook(book, authors );
     res.status(201).json(newBook);
   } catch (error) {
     console.log(error);
@@ -34,10 +34,11 @@ export const getAllBooks = async (req: Request, res: Response) => {
 
 export const updateBookById = async (req: Request, res: Response) => {
   try {
-    const data = req.body;
+    const { title, year, availability, authors } = req.body;
     const book = await bookRepository.updateBookById(
       Number(req.params.id),
-      data
+      {title: title, year: year, availability: availability},
+      authors
     );
     res.status(200).json(book);
   } catch (error) {
